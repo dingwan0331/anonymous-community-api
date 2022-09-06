@@ -12,6 +12,10 @@ const sequelize = new Sequelize(
   databaseConfig
 );
 
+const Post = require("../apps/post/postModel");
+
+const PostModel = Post.init(sequelize);
+
 // model 간 관계를 정의합니다.
 Object.values(sequelize.models).forEach((model) => {
   if (model.associate) {
