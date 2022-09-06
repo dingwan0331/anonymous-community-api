@@ -4,6 +4,7 @@ const Sequelize = require("sequelize");
 const config = require("../config/mysqlConfig");
 const environment = "production";
 const databaseConfig = config[environment];
+const PostClass = require("../apps/post/postModel");
 
 const sequelize = new Sequelize(
   databaseConfig.database,
@@ -12,9 +13,7 @@ const sequelize = new Sequelize(
   databaseConfig
 );
 
-const Post = require("../apps/post/postModel");
-
-const PostModel = Post.init(sequelize);
+const Post = PostClass.init(sequelize);
 
 // model 간 관계를 정의합니다.
 Object.values(sequelize.models).forEach((model) => {
@@ -25,4 +24,5 @@ Object.values(sequelize.models).forEach((model) => {
 
 module.exports = {
   sequelize,
+  Post,
 };
