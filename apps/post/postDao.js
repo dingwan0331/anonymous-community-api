@@ -6,4 +6,13 @@ const createPost = async (inputValues) => {
   return postRow;
 };
 
-module.exports = { createPost };
+const readPosts = async (offset, limit, order) => {
+  const postRows = await Post.findAll({
+    offset: offset,
+    limit: limit,
+    order: [order],
+  });
+  return postRows;
+};
+
+module.exports = { createPost, readPosts };

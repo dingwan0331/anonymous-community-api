@@ -22,4 +22,28 @@ const createPost = async (reqBody) => {
   return postRow;
 };
 
-module.exports = { createPost };
+const readPosts = async ({ offset = 0, limit = 20, orderKey = "latest" }) => {
+  const orderSet = {
+    old: ["createdAt", "ASC"],
+    latest: ["createdAt", "DESC"],
+  };
+
+  const order = orderSet[orderKey];
+
+  const postRows = await postDao.readPosts(offset, limit, order);
+
+  const posts = postRows.map((row) => {
+    const post = {
+      title: row.title,
+      content: row.content,
+      userName: row.userName,
+      createdAt: row.createdAt,
+      updatedAt: row.updatedAt,
+    };
+    return post;
+  });
+
+  return posts;
+};
+
+module.exports = { createPost, readPosts };
