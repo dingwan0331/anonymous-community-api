@@ -4,8 +4,8 @@ const errorLogger = (err, req, res, next) => {
 };
 
 const errorResponder = (err, req, res, next) => {
-  const { status, message, isCustom } = err;
-  if (isCustom) res.status(status).json({ message: message });
+  const { statusCode, message, isCustom } = err;
+  if (isCustom) res.status(statusCode).json({ message: message });
   else {
     res.status(500).json({ message: "Server Error" });
   }
