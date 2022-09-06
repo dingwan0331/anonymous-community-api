@@ -17,7 +17,7 @@ class Validator {
     }
   }
   validatePassword({ password }) {
-    const passwordRegex = /^(?=.*\d)[\d]{6,}$/;
+    const passwordRegex = /^(?=.*\d)[a-zA-Z0-9]{6,}$/;
 
     if (!passwordRegex.test(password)) {
       throw new BadRequestError(`Invalid password`);
