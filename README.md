@@ -13,15 +13,6 @@
 - swagger
 - RESTful API
 
-# Database Modeling
-
-## posts table
-
-<img width="585" alt="image" src="https://user-images.githubusercontent.com/100751719/188915773-32eb0bef-7246-480d-976a-63d89566001c.png">
-
-- posts 단일 테이블이며 비밀번호는 암호화하여 저장합니다.
-- 논리삭제를 위하여 deletedAt 컬럼이 존재합니다.
-
 # Project Structure
 
 ```bash
@@ -61,6 +52,16 @@
 - server.js : 포트를 지정후 서버를 엽니다.
 - .env : 환경변수를 관리합니다. (.gitignore에 기재 되어있습니다.)
 
+
+
+# Database Modeling
+
+## posts table
+
+<img width="585" alt="image" src="https://user-images.githubusercontent.com/100751719/188915773-32eb0bef-7246-480d-976a-63d89566001c.png">
+
+- posts 단일 테이블이며 비밀번호는 암호화하여 저장합니다.
+- 논리삭제를 위하여 deletedAt 컬럼이 존재합니다.
 # End-points
 
 게시물 게시 요청
