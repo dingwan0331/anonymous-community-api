@@ -1,6 +1,10 @@
 const { BadRequestError } = require("../../utils/errors");
 const postService = require("./postService");
 
+/**
+ * @description 게시물 등록하기
+ * @throws {BadRequestError} "Key Error" 메세지를 받아 400에러를 반환합니다.
+ * */
 const createPost = async (req, res, next) => {
   try {
     const { title, content, userName, password } = req.body;
@@ -17,6 +21,9 @@ const createPost = async (req, res, next) => {
   }
 };
 
+/**
+ * @description 게시물 전체 조회하기
+ * */
 const readPosts = async (req, res, next) => {
   try {
     const result = await postService.readPosts(req.query);
