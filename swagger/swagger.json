@@ -1,0 +1,148 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "anomnymous community",
+    "description": "anonymous community api"
+  },
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "posts",
+      "description": "API for posts in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/posts": {
+      "post": {
+        "tags": ["posts"],
+        "summary": "create post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "type": "object", "properties": { "name": "agag" } }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request.body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        ],
+        "responses": {
+          "201 Success": {
+            "schema": {
+              "type": "object",
+              "properties": { "mseeage": { "default": "created" } }
+            }
+          },
+          "400 Key error": {
+            "schema": {
+              "type": "object",
+              "properties": { "mseeage": { "default": "Key error" } }
+            }
+          },
+          "400 Bad request error 1": {
+            "schema": {
+              "type": "object",
+              "properties": { "mseeage": { "default": "Invalid password" } }
+            }
+          },
+          "400 Bad request error 2": {
+            "schema": {
+              "type": "object",
+              "properties": { "mseeage": { "default": "Invalid title" } }
+            }
+          },
+          "400 Bad request error 3": {
+            "schema": {
+              "type": "object",
+              "properties": { "mseeage": { "default": "Invalid content" } }
+            }
+          },
+          "400 Bad request error 4": {
+            "schema": {
+              "type": "object",
+              "properties": { "mseeage": { "default": "Invalid userName" } }
+            }
+          },
+          "500": {
+            "schema": {
+              "type": "object",
+              "properties": { "mseeage": { "default": "Server Error" } }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["posts"],
+        "summary": "get posts",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "정수형태"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "정수형태"
+          },
+          {
+            "in": "query",
+            "name": "order-key",
+            "description": "latest & old만 허용"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "posts": { "default": "post data objects" }
+              }
+            }
+          },
+          "500": {
+            "schema": {
+              "type": "object",
+              "properties": { "mseeage": { "default": "Invalid password" } }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Post": {
+      "required": ["title", "content", "userName", "password"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "default": "20글자 이하만 허용합니다"
+        },
+        "content": {
+          "type": "string",
+          "default": "200글자 이하만 허용합니다"
+        },
+        "userName": {
+          "type": "string",
+          "default": "10글자 이하만 허용합니다"
+        },
+        "password": {
+          "type": "string",
+          "default": "숫자 1개를 포함한 6글자 이상의 숫자 + 영어 대소문자 조합만 허용합니다"
+        }
+      }
+    }
+  }
+}
