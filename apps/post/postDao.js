@@ -29,4 +29,25 @@ const readPosts = async (offset, limit, order) => {
   return postRows;
 };
 
-module.exports = { createPost, readPosts };
+/**
+ * @description posts 테이블의 자원을 pk값으로 조회합니다.
+ * @param {number} postId 조회할 데이터 pk 값
+ * @returns {Object}
+ */
+const readPost = async (postId) => {
+  const postRow = await Post.findByPk(postId);
+  return postRow;
+};
+
+/**
+ * @description posts 테이블의 자원을 삭제합니다.
+ * @param {number} postId 조회할 데이터 pk 값
+ * @returns {number}
+ */
+const deletePost = async (postId) => {
+  const deleteCount = await Post.destroy({ where: { id: postId } });
+
+  return deleteCount;
+};
+
+module.exports = { createPost, readPosts, readPost, deletePost };

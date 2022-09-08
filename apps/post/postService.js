@@ -1,6 +1,7 @@
 const { Validator } = require("../../utils/validators");
 const postDao = require("./postDao");
 const bcrypt = require("bcrypt");
+const { BadRequestError, NotFoundError } = require("../../utils/errors");
 
 /**
  * @description 게시판 데이터 생성에 대한 유효성검사와 비밀번호를 암호화합니다.
@@ -73,4 +74,30 @@ const readPosts = async ({ offset = 0, limit = 20, orderKey = "latest" }) => {
   return posts;
 };
 
-module.exports = { createPost, readPosts };
+/**
+ * @description 게시물의 password와 pk를 받아 패스워드 검증후 데이터를 삭제합니다.
+ * @param {string} postId 삭제할 게시물의 pk값입니다.
+ * @param {string} password 게시물 삭제시 권한 검증을 위한 패스워드입니다. DB에 저장된 password와 일치하여야합니다.
+ * @returns {number} 삭제한 데이터 갯수를 반환합니다.
+ */
+
+const deletePost = async (postId, password) => {
+  const postRow = await postDao.readPost(postId);
+
+  if (!postRow) {
+    throw new NotFoundError("Invalid URL");
+  }
+
+  const postRowPassword = postRow.password;
+
+  const isSamePassword = await bcrypt.compare(password, postRowPassword);
+
+  if (!isSamePassword) {
+    throw new BadRequestError("Invalid password");
+  }
+
+  const deletePost = await postDao.deletePost(postId);
+
+  return deletePost;
+};
+module.exports = { createPost, readPosts, deletePost };
