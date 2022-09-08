@@ -6,7 +6,7 @@ const { errorLogger, errorResponder } = require("./middlewares/errorHandler");
 const { sequelize } = require("./models");
 const ccqp = require("ccqp");
 const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger/swagger.json");
+const swaggerDocument = require("./swagger/swagger-output.json");
 
 const app = express();
 
@@ -21,7 +21,11 @@ app.use(express.json());
 app.use(ccqp);
 
 app.use(indexRouter);
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(
+  "/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, { explorer: true })
+);
 
 app.use(errorLogger);
 app.use(errorResponder);
