@@ -38,6 +38,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "jsdoc": "^3.6.11",
     "nodemon": "^2.0.19",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "swagger-autogen": "^2.21.5"
   }
 }

@@ -3,9 +3,14 @@ const router = express.Router();
 const postRouter = require("../apps/post/postRouter");
 
 router.get("/ping", (req, res) => {
+  // #swagger.tags = ['Ping test']
   res.status(200).json({ message: "pong" });
 });
 
-router.use("/posts", postRouter);
+router.use(
+  // #swagger.tags = ['Posts']
+  "/posts",
+  postRouter
+);
 
 module.exports = router;
