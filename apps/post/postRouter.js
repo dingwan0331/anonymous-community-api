@@ -10,4 +10,7 @@ router.get("", postController.readPosts);
 // 게시물 삭제
 router.delete("/:postId", postController.deletePost);
 
+// 게시물 수정
+router.patch("/:postId", postController.updatePost);
+
 module.exports = router;

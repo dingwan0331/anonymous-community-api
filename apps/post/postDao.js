@@ -50,4 +50,15 @@ const deletePost = async (postId) => {
   return deleteCount;
 };
 
-module.exports = { createPost, readPosts, readPost, deletePost };
+/**
+ * @description posts 테이블의 자원을 수정 합니다.
+ * @param {number} postId 조회할 데이터 pk 값
+ * @returns {number}
+ */
+const updatePost = async (postId, upadateData) => {
+  const upadateRow = await Post.update(upadateData, { where: { id: postId } });
+
+  return upadateRow;
+};
+
+module.exports = { createPost, readPosts, readPost, deletePost, updatePost };
