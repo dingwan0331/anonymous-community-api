@@ -23,7 +23,7 @@
 │       ├── postRouter.js
 │       ├── postController.js
 │       ├── postService.js
-│       └──  postDao.js
+│       └── postDao.js
 ├── config
 ├── middlewares
 ├── models
@@ -52,8 +52,6 @@
 - server.js : 포트를 지정후 서버를 엽니다.
 - .env : 환경변수를 관리합니다. (.gitignore에 기재 되어있습니다.)
 
-
-
 # Database Modeling
 
 ## posts table
@@ -62,6 +60,7 @@
 
 - posts 단일 테이블이며 비밀번호는 암호화하여 저장합니다.
 - 논리삭제를 위하여 deletedAt 컬럼이 존재합니다.
+
 # End-points
 
 게시물 게시 요청
