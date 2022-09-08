@@ -1,4 +1,4 @@
-const { BadRequestError } = require("../../utils/errors");
+const { BadRequestError, NotFoundError } = require("../../utils/errors");
 const postService = require("./postService");
 
 /**
@@ -34,4 +34,28 @@ const readPosts = async (req, res, next) => {
   }
 };
 
-module.exports = { createPost, readPosts };
+/**
+ * @description 게시물 단일 삭제 기능
+ * */
+const deletePost = async (req, res, next) => {
+  try {
+    const { postId } = req.params;
+    const { password } = req.body;
+
+    if (!postId) {
+      throw new NotFoundError("Invalid URL");
+    }
+
+    if (!password) {
+      throw new BadRequestError("Key error");
+    }
+
+    const result = await postService.deletePost(postId, password);
+
+    res.status(204).end();
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { createPost, readPosts, deletePost };
