@@ -101,7 +101,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/Post:patch-request-body"
+                "$ref": "#/definitions/Post:delete-request-body"
               }
             }
           }
@@ -136,7 +136,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/Post:delete-request-body"
+                "$ref": "#/definitions/Post:patch-request-body"
               }
             }
           }
@@ -193,16 +193,6 @@
     "Post:delete-request-body": {
       "required": ["title", "content", "userName", "password"],
       "properties": {
-        "title": {
-          "type": "string",
-          "example": "20글자 이하만 허용합니다.",
-          "description": "게시물 제목입니다. 20글자 이하만 허용합니다."
-        },
-        "content": {
-          "type": "string",
-          "example": "200글자 이하만 허용합니다.",
-          "description": "게시물 본문입니다. 200글자 이하만 허용합니다."
-        },
         "password": {
           "type": "string",
           "example": "DB의 게시물 비밀번호와 일치해야합니다.",
