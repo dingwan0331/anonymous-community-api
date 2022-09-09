@@ -2,8 +2,8 @@
 
 const Sequelize = require("sequelize");
 const config = require("../config/mysqlConfig");
-const environment = "production";
-const databaseConfig = config[environment];
+const { NODE_ENV } = require("../config");
+const databaseConfig = config[NODE_ENV];
 const PostClass = require("../apps/post/postModel");
 
 const sequelize = new Sequelize(

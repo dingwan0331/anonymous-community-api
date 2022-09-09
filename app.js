@@ -7,13 +7,18 @@ const { sequelize } = require("./models");
 const ccqp = require("ccqp");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger/swagger-output.json");
+const { NODE_ENV } = require("./config");
 
 const app = express();
 
-sequelize
-  .sync({ force: false })
-  .then(() => console.log("connected database"))
-  .catch((err) => console.error("occurred error in database connecting", err));
+if (NODE_ENV !== "test") {
+  sequelize
+    .sync({ force: false })
+    .then(() => console.log("connected database"))
+    .catch((err) =>
+      console.error("occurred error in database connecting", err)
+    );
+}
 
 app.use(cors());
 app.use(logger("combined"));

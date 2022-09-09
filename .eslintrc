@@ -20,6 +20,7 @@
     "no-multiple-empty-lines": "warn",
     "no-unused-vars": "warn",
     "no-var": "error",
+    "no-undef": "warn",
     "prettier/prettier": [
       "error",
       {
