@@ -14,7 +14,7 @@ class Validator {
     };
     for (let i = 0; i < Object.keys(inputObject).length; i++) {
       const key = Object.keys(inputObject)[i];
-      const value = inputObject[value];
+      const value = inputObject[key];
 
       this.config[key](value);
     }
