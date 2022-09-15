@@ -9,11 +9,16 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger/swagger-output.json");
 
 const app = express();
+const NODE_ENV = process.env.NODE_ENV;
 
-sequelize
-  .sync({ force: false })
-  .then(() => console.log("connected database"))
-  .catch((err) => console.error("occurred error in database connecting", err));
+if (NODE_ENV !== "test") {
+  sequelize
+    .sync({ force: false })
+    .then(() => console.log("connected database"))
+    .catch((err) =>
+      console.error("occurred error in database connecting", err)
+    );
+}
 
 app.use(cors());
 app.use(logger("combined"));
