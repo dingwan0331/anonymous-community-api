@@ -9,7 +9,7 @@ const createPost = async (req, res, next) => {
   try {
     const { title, content, userName, password } = req.body;
 
-    if (!title && !content && !userName && !password) {
+    if (!title || !content || !userName || !password) {
       throw new BadRequestError("Key error");
     }
 
@@ -70,7 +70,7 @@ const updatePost = async (req, res, next) => {
       throw new NotFoundError("Invalid URL");
     }
 
-    if (!password && !title && !content) {
+    if (!password || !title || !content) {
       throw new BadRequestError("Key error");
     }
 
