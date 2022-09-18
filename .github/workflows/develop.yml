@@ -29,7 +29,7 @@ jobs:
           echo TEST_MYSQL_USERNAME=${{ secrets.MYSQL_USER }} >> .env
           echo TEST_MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> .env
           echo TEST_MYSQL_NAME=test
-          echo TEST_MYSQL_HOST=localhost
+          echo TEST_MYSQL_HOST=127.0.0.1
           echo TEST_MYSQL_PORT=3306
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
