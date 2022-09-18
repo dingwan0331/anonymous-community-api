@@ -17,10 +17,20 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - name: sql setup
+    - uses: mirromutth/mysql-action@v1.1
+      with:
+        mysql root password: ${{ secrets.MYSQL_ROOT_PASSWORD }} 
+        mysql user: ${{ secrets.MYSQL_USER }}
+        mysql password: ${{ secrets.MYSQL_PASSWORD }} 
     - name: Create .env file
       run: |
           touch .env
-          echo NODE_ENV=${{ secrets.DEVELOP_NODE_ENV }} >> .env
+          echo TEST_MYSQL_USERNAME=${{ secrets.MYSQL_USER }} >> .env
+          echo TEST_MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> .env
+          echo TEST_MYSQL_NAME=test
+          echo TEST_MYSQL_HOST=localhost
+          echo TEST_MYSQL_PORT=3306
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
