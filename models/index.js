@@ -1,15 +1,14 @@
 "use strict";
 
-const NODE_ENV = process.env.NODE_ENV;
 const Sequelize = require("sequelize");
-const databaseConfig = require("../config/mysqlConfig")[NODE_ENV];
+const database = require("../config/mysqlConfig");
 const PostClass = require("../apps/post/postModel");
 
 const sequelize = new Sequelize(
-  databaseConfig.database,
-  databaseConfig.username,
-  databaseConfig.password,
-  databaseConfig
+  database.database,
+  database.username,
+  database.password,
+  database
 );
 
 const Post = PostClass.init(sequelize);
