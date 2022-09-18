@@ -44,8 +44,8 @@ jobs:
     - name: Create .env file
       run: |
           touch .env
-          echo TEST_MYSQL_USERNAME=${{ secrets.MYSQL_USER }} >> .env
-          echo TEST_MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> .env
+          echo TEST_MYSQL_USERNAME=root >> .env
+          echo TEST_MYSQL_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }} >> .env
           echo TEST_MYSQL_NAME=test >> .env
           echo TEST_MYSQL_HOST=127.0.0.1 >> .env
           echo TEST_MYSQL_PORT=3306 >> .env
