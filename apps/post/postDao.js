@@ -1,4 +1,3 @@
-const { Post } = require("../../models");
 /**
  * @description
  * @param {Object} inputValues 제목,내용,유저네임,패스워드

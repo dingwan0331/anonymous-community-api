@@ -1,9 +1,15 @@
 require("dotenv").config();
 
-const env = process.env;
+const { NODE_ENV, SERVER_PORT = 8000, SECRET_KEY } = process.env;
 
-const SERVER_PORT = env.SERVER_PORT || 8000;
+const mongoEnvSet = {
+  development: "DEV",
+  test: "TEST",
+  production: "PRODUCTION",
+};
 
-const SECRET_KEY = env.SECRET_KEY;
+const mongoEnv = mongoEnvSet[NODE_ENV];
 
-module.exports = { SERVER_PORT, SECRET_KEY };
+const MONGO_URL = process.env[`${mongoEnv}_MONGO_URL`];
+
+module.exports = { SERVER_PORT, SECRET_KEY, MONGO_URL };
