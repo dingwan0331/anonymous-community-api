@@ -7,6 +7,7 @@ on:
     branches: [ develop ]
 
 jobs:
+
   build:
     name: build and test
     runs-on: ubuntu-latest
@@ -15,46 +16,32 @@ jobs:
       matrix:
         node-version: [ 14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-        
-    services:  
-      mysql:   # 사용할 서비스 명
-        image: mysql:5.7  # 사용할 서비스의 이미지(도커 개념 기반)
-        env:   # 사용할 서비스의 환경설정
-          MYSQL_USER: ${{ secrets.MYSQL_USER }} 
-          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-          MYSQL_DATABASE: test
-        ports: 
-          - 3306
-        options: >-  # 서비스에 걸어줄 옵션
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-        
-    steps:
-    - name: verify MySQL connection from host
-        # 아래는 실행문, cli에 입력하듯이 명령어를 작성하면 된다.
-      run: |
-          mysql --version
-          sudo apt-get install -y mysql-client
-          sudo service mysql start
-          mysql -uroot -proot -e "CREATE DATABASE test"
-          mysql -uroot -proot -e "SHOW DATABASES"
+    steps:          
+    - uses: actions/checkout@v3
     - name: Create .env file
       run: |
           touch .env
-          echo TEST_MYSQL_USERNAME=root >> .env
+          echo TEST_MYSQL_USERNAME=root>> .env
           echo TEST_MYSQL_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }} >> .env
           echo TEST_MYSQL_NAME=test >> .env
           echo TEST_MYSQL_HOST=127.0.0.1 >> .env
           echo TEST_MYSQL_PORT=3306 >> .env
-    - uses: actions/checkout@v3
+          cat .env
+          
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        
+    - name: MySQL setup
+      uses: mirromutth/mysql-action@v1.1
+      with:
+        mysql database: test
+        mysql root password: ${{ secrets.MYSQL_ROOT_PASSWORD }} 
+        mysql user: ${{ secrets.MYSQL_USER }}
+        mysql password: ${{ secrets.MYSQL_PASSWORD }} 
+        
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
