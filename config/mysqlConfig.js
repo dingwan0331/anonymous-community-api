@@ -20,6 +20,13 @@ const database = {
   dialect: "mysql",
   port: env[`${mysqlEnv}_MYSQL_PORT`],
   logging: false,
+  reconnect: true,
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
 };
 
 module.exports = database;
