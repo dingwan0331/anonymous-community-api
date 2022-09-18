@@ -15,14 +15,24 @@ jobs:
       matrix:
         node-version: [ 14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+        
+    services:  
+      mysql:   # 사용할 서비스 명
+        image: mysql:5.7  # 사용할 서비스의 이미지(도커 개념 기반)
+        env:   # 사용할 서비스의 환경설정
+          MYSQL_USER: ${{ secrets.MYSQL_USER }} 
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: test
+        ports: 
+          - 3306
+        options: >-  # 서비스에 걸어줄 옵션
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        
     steps:
-    - name: sql setup
-    - uses: mirromutth/mysql-action@v1.1
-      with:
-        mysql root password: ${{ secrets.MYSQL_ROOT_PASSWORD }} 
-        mysql user: ${{ secrets.MYSQL_USER }}
-        mysql password: ${{ secrets.MYSQL_PASSWORD }} 
     - name: Create .env file
       run: |
           touch .env
