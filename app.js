@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const logger = require("morgan");
 const indexRouter = require("./routes");
-const { errorLogger, errorResponder } = require("./middlewares/errorHandler");
+const { errorResponder } = require("./middlewares/errorHandler");
 const ccqp = require("ccqp");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger/swagger-output.json");
@@ -35,7 +35,6 @@ app.use(
   swaggerUi.setup(swaggerDocument, { explorer: true })
 );
 
-app.use(errorLogger);
 app.use(errorResponder);
 
 module.exports = app;
