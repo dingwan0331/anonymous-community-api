@@ -1,6 +1,6 @@
 const supertest = require("supertest");
-const app = require("../app");
-const { mongoose, Post } = require("../models");
+const app = require("../src/app.js");
+const { mongoose, Post } = require("../src/models");
 
 afterAll(async () => {
   mongoose.disconnect();
