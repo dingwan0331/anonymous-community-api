@@ -12,8 +12,7 @@ class Validator {
       content: this.validateContent,
       userName: this.validateUserName,
     };
-    for (let i = 0; i < Object.keys(inputObject).length; i++) {
-      const key = Object.keys(inputObject)[i];
+    for (let key in inputObject) {
       const value = inputObject[key];
 
       this.config[key](value);
