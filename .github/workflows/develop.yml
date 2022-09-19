@@ -7,7 +7,6 @@ on:
     branches: [ develop ]
 
 jobs:
-
   build:
     name: build and test
     runs-on: ubuntu-latest
@@ -16,34 +15,32 @@ jobs:
       matrix:
         node-version: [ 14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-    steps:          
+
+    steps:         
     - uses: actions/checkout@v3
     - name: Create .env file
       run: |
           touch .env
-          echo TEST_MYSQL_USERNAME=root>> .env
-          echo TEST_MYSQL_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }} >> .env
-          echo TEST_MYSQL_NAME=test >> .env
-          echo TEST_MYSQL_HOST=127.0.0.1 >> .env
-          echo TEST_MYSQL_PORT=3306 >> .env
+          echo TEST_MONGO_URL=mongodb://127.0.0.1:27017 >> .env
           cat .env
-          
+      
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        
-    - name: Shutdown Ubuntu MySQL (SUDO)
-      run: sudo service mysql stop
-        
-    - name: MySQL setup
-      uses: mirromutth/mysql-action@v1.1
+    
+    - name: Create mongo Docker container
+      id: build_mongo_docker
+      uses: DigiPie/mongo-action@v1.0.1
       with:
-        mysql database: test
-        mysql root password: ${{ secrets.MYSQL_ROOT_PASSWORD }} 
-        mysql user: ${{ secrets.MYSQL_USER }}
-        mysql password: ${{ secrets.MYSQL_PASSWORD }} 
+        image-version: latest
+        port: 27017
+          
+    - name: Test mongo connection
+      id: test_mongo_connection
+      run: "sudo mongo localhost:27017"
+    
         
     - run: npm ci
     - run: npm run build --if-present
