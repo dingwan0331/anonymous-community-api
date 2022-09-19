@@ -15,7 +15,6 @@ const { BadRequestError, NotFoundError } = require("../../utils/errors");
 const createPost = async (reqBody) => {
   const { title, content, userName, password } = reqBody;
 
-  // 데이터 유효성 검사
   new Validator(reqBody);
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -114,7 +113,6 @@ const deletePost = async (postId, password) => {
 const updatePost = async (postId, reqBody) => {
   const { password, content, title } = reqBody;
 
-  // 데이터 유효성 검사
   new Validator(reqBody);
 
   const postRow = await postDao.readPost(postId);
