@@ -62,6 +62,7 @@ const readPosts = async ({ offset = 0, limit = 20, orderKey = "latest" }) => {
    */
   const posts = postRows.map((row) => {
     const post = {
+      _id: row._id,
       title: row.title,
       content: row.content,
       userName: row.userName,
