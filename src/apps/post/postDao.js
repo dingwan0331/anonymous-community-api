@@ -7,13 +7,12 @@ const { Post } = require("../../models");
  * @param {string} inputValues.content 게시물 내용
  * @param {string} inputValues.userName 게시물 작성자
  * @param {string} inputValues.password 암호화된 게시물 비밀번호
- * @returns {object}
  */
 const createPost = async (inputValues) => {
   const postRow = new Post(inputValues);
   await postRow.save();
 
-  return postRow;
+  return;
 };
 
 /**
@@ -41,23 +40,20 @@ const readPost = async (postId) => {
 /**
  * @description posts 테이블의 자원을 삭제합니다.
  * @param {number} postId 조회할 데이터 pk 값
- * @returns {number}
  */
 const deletePost = async (postId) => {
-  const deleteCount = await Post.deleteById(postId);
-
-  return deleteCount;
+  await Post.deleteById(postId);
+  return;
 };
 
 /**
  * @description posts 테이블의 자원을 수정 합니다.
  * @param {number} postId 조회할 데이터 pk 값
- * @returns {number}
  */
 const updatePost = async (postId, upadateData) => {
-  const upadateRow = await Post.update({ _id: postId }, { $set: upadateData });
+  await Post.update({ _id: postId }, { $set: upadateData });
 
-  return upadateRow;
+  return;
 };
 
 module.exports = { createPost, readPosts, readPost, deletePost, updatePost };

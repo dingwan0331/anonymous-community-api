@@ -13,7 +13,7 @@ const createPost = async (req, res, next) => {
       throw new BadRequestError("Key error");
     }
 
-    const result = await postService.createPost(req.body);
+    await postService.createPost(req.body);
 
     res.status(201).json({ message: "Created" });
   } catch (err) {
@@ -50,7 +50,7 @@ const deletePost = async (req, res, next) => {
       throw new BadRequestError("Key error");
     }
 
-    const result = await postService.deletePost(postId, password);
+    await postService.deletePost(postId, password);
 
     res.status(204).end();
   } catch (err) {
@@ -74,7 +74,7 @@ const updatePost = async (req, res, next) => {
       throw new BadRequestError("Key error");
     }
 
-    const result = await postService.updatePost(postId, req.body);
+    await postService.updatePost(postId, req.body);
 
     res.status(204).end();
   } catch (err) {
