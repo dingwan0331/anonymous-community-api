@@ -3,7 +3,7 @@ const app = require("../src/app.js");
 const { mongoose, Post } = require("../src/models");
 
 afterAll(async () => {
-  mongoose.disconnect();
+  await mongoose.disconnect();
 });
 
 afterEach(async () => {

@@ -3,7 +3,7 @@ const app = require("../src/app.js");
 const { mongoose } = require("../src/models");
 
 afterAll(async () => {
-  mongoose.disconnect();
+  await mongoose.disconnect();
 });
 
 describe("GET /ping", () => {
