@@ -34,7 +34,7 @@ const readPosts = async (offset, limit, order) => {
  * @returns {Object}
  */
 const readPost = async (postId) => {
-  const postRow = await Post.findByPk(postId);
+  const postRow = await Post.findById(postId);
   return postRow;
 };
 
