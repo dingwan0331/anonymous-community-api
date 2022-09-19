@@ -26,9 +26,9 @@ const createPost = async (reqBody) => {
     password: hashedPassword,
   };
 
-  const postRow = await postDao.createPost(postData);
+  await postDao.createPost(postData);
 
-  return postRow;
+  return;
 };
 
 /**
@@ -96,9 +96,9 @@ const deletePost = async (postId, password) => {
     throw new BadRequestError("Invalid password");
   }
 
-  const deletePost = await postDao.deletePost(postId);
+  await postDao.deletePost(postId);
 
-  return deletePost;
+  return;
 };
 
 /**
@@ -130,8 +130,8 @@ const updatePost = async (postId, reqBody) => {
 
   const upadateData = { content: content, title: title };
 
-  const result = await postDao.updatePost(postId, upadateData);
+  await postDao.updatePost(postId, upadateData);
 
-  return result;
+  return;
 };
 module.exports = { createPost, readPosts, deletePost, updatePost };
