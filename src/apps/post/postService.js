@@ -126,9 +126,11 @@ const updatePost = async (postId, reqBody) => {
 
   const isSamePassword = await bcrypt.compare(password, postRowPassword);
 
-  // update시 사용할 객체의 default값으로 기존 데이터값을 지정합니다.
-  const postRowConfig = { titile: postRow.title, content: postRow.content };
-  const upadateData = Object.assign(postRowConfig, reqBody);
+  if (!isSamePassword) {
+    throw new BadRequestError("Invalid password");
+  }
+
+  const upadateData = { content: content, title: title };
 
   const result = await postDao.updatePost(postId, upadateData);
 
