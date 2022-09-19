@@ -16,8 +16,15 @@ mongoose
   .then(() => console.log("Successfully connected to mongodb"))
   .catch((err) => console.error(err));
 
+const loggerSet = {
+  production: "combined",
+  development: "dev",
+  test: "dev",
+};
+const loggerOption = loggerSet[process.env.NODE_ENV];
+
 app.use(cors());
-app.use(logger("combined"));
+app.use(logger(loggerOption));
 app.use(express.json());
 app.use(ccqp);
 
