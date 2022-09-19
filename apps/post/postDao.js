@@ -1,3 +1,5 @@
+const { Post } = require("../../models");
+
 /**
  * @description
  * @param {Object} inputValues 제목,내용,유저네임,패스워드
@@ -8,10 +10,12 @@
  * @returns {object}
  */
 const createPost = async (inputValues) => {
-  const postRow = await Post.create(inputValues);
+  const postRow = new Post(inputValues);
+  await postRow.save();
 
   return postRow;
 };
+
 /**
  * @description
  * @param {string || number} offset ORM offset 값
