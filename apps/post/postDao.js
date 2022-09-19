@@ -44,7 +44,7 @@ const readPost = async (postId) => {
  * @returns {number}
  */
 const deletePost = async (postId) => {
-  const deleteCount = await Post.destroy({ where: { id: postId } });
+  const deleteCount = await Post.deleteById(postId);
 
   return deleteCount;
 };
