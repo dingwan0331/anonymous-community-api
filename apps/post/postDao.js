@@ -24,11 +24,7 @@ const createPost = async (inputValues) => {
  * @returns {Array}
  */
 const readPosts = async (offset, limit, order) => {
-  const postRows = await Post.findAll({
-    offset: offset,
-    limit: limit,
-    order: [order],
-  });
+  const postRows = await Post.find().sort([order]).skip(offset).limit(limit);
   return postRows;
 };
 
