@@ -55,7 +55,7 @@ const deletePost = async (postId) => {
  * @returns {number}
  */
 const updatePost = async (postId, upadateData) => {
-  const upadateRow = await Post.update(upadateData, { where: { id: postId } });
+  const upadateRow = await Post.update({ _id: postId }, { $set: upadateData });
 
   return upadateRow;
 };
