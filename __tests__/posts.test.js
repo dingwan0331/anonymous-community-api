@@ -1,13 +1,13 @@
 const supertest = require("supertest");
 const app = require("../app");
-const { sequelize, Post } = require("../models");
+const { mongoose, Post } = require("../models");
 
-beforeAll(async () => {
-  await sequelize.sync({ force: false });
+afterAll(async () => {
+  mongoose.disconnect();
 });
 
 afterEach(async () => {
-  await Post.truncate({ force: true });
+  Post.deleteMany();
 });
 
 describe("Post /posts", () => {
