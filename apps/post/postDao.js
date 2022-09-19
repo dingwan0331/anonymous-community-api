@@ -1,4 +1,5 @@
 const { Post } = require("../../models");
+
 /**
  * @description
  * @param {Object} inputValues 제목,내용,유저네임,패스워드
@@ -9,10 +10,12 @@ const { Post } = require("../../models");
  * @returns {object}
  */
 const createPost = async (inputValues) => {
-  const postRow = await Post.create(inputValues);
+  const postRow = new Post(inputValues);
+  await postRow.save();
 
   return postRow;
 };
+
 /**
  * @description
  * @param {string || number} offset ORM offset 값
@@ -21,11 +24,7 @@ const createPost = async (inputValues) => {
  * @returns {Array}
  */
 const readPosts = async (offset, limit, order) => {
-  const postRows = await Post.findAll({
-    offset: offset,
-    limit: limit,
-    order: [order],
-  });
+  const postRows = await Post.find().sort([order]).skip(offset).limit(limit);
   return postRows;
 };
 
@@ -35,7 +34,7 @@ const readPosts = async (offset, limit, order) => {
  * @returns {Object}
  */
 const readPost = async (postId) => {
-  const postRow = await Post.findByPk(postId);
+  const postRow = await Post.findById(postId);
   return postRow;
 };
 
@@ -45,7 +44,7 @@ const readPost = async (postId) => {
  * @returns {number}
  */
 const deletePost = async (postId) => {
-  const deleteCount = await Post.destroy({ where: { id: postId } });
+  const deleteCount = await Post.deleteById(postId);
 
   return deleteCount;
 };
@@ -56,7 +55,7 @@ const deletePost = async (postId) => {
  * @returns {number}
  */
 const updatePost = async (postId, upadateData) => {
-  const upadateRow = await Post.update(upadateData, { where: { id: postId } });
+  const upadateRow = await Post.update({ _id: postId }, { $set: upadateData });
 
   return upadateRow;
 };

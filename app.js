@@ -3,22 +3,18 @@ const cors = require("cors");
 const logger = require("morgan");
 const indexRouter = require("./routes");
 const { errorLogger, errorResponder } = require("./middlewares/errorHandler");
-const { sequelize } = require("./models");
 const ccqp = require("ccqp");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger/swagger-output.json");
+const { mongoose } = require("./models");
+const { MONGO_URL } = require("./config");
 
 const app = express();
-const NODE_ENV = process.env.NODE_ENV;
 
-if (NODE_ENV !== "test") {
-  sequelize
-    .sync({ force: false })
-    .then(() => console.log("connected database"))
-    .catch((err) =>
-      console.error("occurred error in database connecting", err)
-    );
-}
+mongoose
+  .connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Successfully connected to mongodb"))
+  .catch((err) => console.error(err));
 
 app.use(cors());
 app.use(logger("combined"));
