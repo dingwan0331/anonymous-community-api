@@ -86,7 +86,7 @@ const deletePost = async (postId, password) => {
   const postRow = await postDao.readPost(postId);
 
   if (!postRow) {
-    throw new NotFoundError("Invalid URL");
+    throw new NotFoundError();
   }
 
   const postRowPassword = postRow.password;
@@ -120,7 +120,7 @@ const updatePost = async (postId, reqBody) => {
   const postRow = await postDao.readPost(postId);
 
   if (!postRow) {
-    throw new NotFoundError("Invalid URL");
+    throw new NotFoundError();
   }
   const postRowPassword = postRow.password;
 
