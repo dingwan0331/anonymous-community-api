@@ -6,11 +6,11 @@ afterAll(async () => {
   await mongoose.disconnect();
 });
 
-afterEach(async () => {
-  Post.deleteMany();
-});
-
 describe("Post /posts", () => {
+  afterEach(async () => {
+    await Post.deleteMany();
+  });
+
   test("Success", async () => {
     const reqJson = {
       title: "제목입니다",
