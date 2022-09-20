@@ -28,7 +28,7 @@ const readPosts = async (req, res, next) => {
   try {
     const result = await postService.readPosts(req.query);
 
-    res.status(201).json({ posts: result });
+    res.status(200).json({ posts: result });
   } catch (err) {
     next(err);
   }
