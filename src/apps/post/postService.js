@@ -134,4 +134,28 @@ const updatePost = async (postId, reqBody) => {
 
   return;
 };
-module.exports = { createPost, readPosts, deletePost, updatePost };
+
+/**
+ * @description 게시물단일 조회기능
+ * @param {string} postId 조회할 게시물의 _id 입니다.
+ * @returns {object} 게시물 정보
+ */
+const readPost = async (postId) => {
+  const postRow = await postDao.readPost(postId);
+
+  if (!postRow) {
+    throw new NotFoundError();
+  }
+
+  const post = {
+    _id: postRow._id,
+    title: postRow.title,
+    content: postRow.content,
+    userName: postRow.userName,
+    createdAt: postRow.createdAt,
+    updatedAt: postRow.updatedAt,
+  };
+
+  return post;
+};
+module.exports = { createPost, readPosts, deletePost, updatePost, readPost };

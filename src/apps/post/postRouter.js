@@ -5,6 +5,7 @@ const postController = require("./postController");
 router.post("", postController.createPost);
 
 router.get("", postController.readPosts);
+router.get("/:postId", postController.readPost);
 
 router.delete("/:postId", postController.deletePost);
 

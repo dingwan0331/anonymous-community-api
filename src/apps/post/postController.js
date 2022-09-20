@@ -82,4 +82,17 @@ const updatePost = async (req, res, next) => {
   }
 };
 
-module.exports = { createPost, readPosts, deletePost, updatePost };
+/**
+ * @description 게시물 단일 조회 기능
+ * */
+const readPost = async (req, res, next) => {
+  try {
+    const { postId } = req.params;
+    const post = await postService.readPost(postId);
+
+    res.status(200).json({ post: post });
+  } catch (err) {
+    next(err);
+  }
+};
+module.exports = { createPost, readPosts, deletePost, updatePost, readPost };
