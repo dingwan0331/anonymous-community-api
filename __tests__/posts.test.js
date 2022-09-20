@@ -1,14 +1,19 @@
 const supertest = require("supertest");
 const app = require("../src/app.js");
-const { mongoose, Post } = require("../src/models");
+const { Post } = require("../src/models");
+const db = require("./config/mongoDB.js");
+
+beforeAll(async () => {
+  await db.connect();
+});
 
 afterAll(async () => {
-  await mongoose.disconnect();
+  await db.disconnect();
 });
 
 describe("Post /posts", () => {
   afterEach(async () => {
-    await Post.deleteMany();
+    await db.drop();
   });
 
   test("Success", async () => {
