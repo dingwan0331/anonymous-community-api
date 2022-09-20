@@ -1,10 +1,5 @@
 const supertest = require("supertest");
 const app = require("../src/app.js");
-const { mongoose } = require("../src/models");
-
-afterAll(async () => {
-  await mongoose.disconnect();
-});
 
 describe("GET /ping", () => {
   test("Success", async () => {
