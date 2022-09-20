@@ -6,15 +6,8 @@ const { errorResponder } = require("./middlewares/errorHandler");
 const ccqp = require("ccqp");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger/swagger-output.json");
-const { mongoose } = require("./models");
-const { MONGO_URL } = require("./config");
 
 const app = express();
-
-mongoose
-  .connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Successfully connected to mongodb"))
-  .catch((err) => console.error(err));
 
 const loggerSet = {
   production: "combined",
