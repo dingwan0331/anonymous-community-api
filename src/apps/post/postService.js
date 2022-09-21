@@ -47,6 +47,18 @@ const readPosts = async ({ offset = 0, limit = 20, orderKey = "latest" }) => {
 
   const order = orderSet[orderKey];
 
+  if (isNaN(+offset)) {
+    throw new BadRequestError("Invalid offset");
+  }
+
+  if (isNaN(+limit)) {
+    throw new BadRequestError("Invalid limit");
+  }
+
+  if (!order) {
+    throw new BadRequestError("Invalid order-key");
+  }
+
   const postRows = await postDao.readPosts(offset, limit, order);
 
   /**

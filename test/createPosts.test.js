@@ -1,16 +1,21 @@
 const supertest = require("supertest");
 const app = require("../src/app.js");
-const { mongoose, Post } = require("../src/models");
+const { Post } = require("../src/models");
+const db = require("./config/mongoDB.js");
 
-afterAll(async () => {
-  await mongoose.disconnect();
+beforeAll(async () => {
+  await db.connect();
 });
 
-afterEach(async () => {
-  Post.deleteMany();
+afterAll(async () => {
+  await db.disconnect();
 });
 
 describe("Post /posts", () => {
+  afterEach(async () => {
+    await db.drop();
+  });
+
   test("Success", async () => {
     const reqJson = {
       title: "제목입니다",
