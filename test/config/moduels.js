@@ -9,11 +9,11 @@ const createTestJson = (
 
   for (let i = 0; i < limit; i++) {
     if (orderKey === "latest") {
-      idx = -(i + 1 + offset);
+      idx = configRows.length - i - 1 - offset;
     } else if (orderKey === "old") {
       idx = i + offset;
     }
-    let row = configRows.at(idx);
+    let row = configRows[idx];
     let pushRow = {
       _id: row._id,
       title: row.title,
