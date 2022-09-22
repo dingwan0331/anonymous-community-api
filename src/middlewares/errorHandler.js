@@ -4,8 +4,11 @@
  */
 const errorResponder = (err, req, res, next) => {
   const { statusCode, message, isCustom } = err;
-  if (isCustom) res.status(statusCode).json({ message: message });
-  else {
+  if (isCustom) {
+    res.status(statusCode).json({ message: message });
+  } else if (err.name === "CastError") {
+    res.status(404).json({ message: "Not Found url" });
+  } else {
     res.status(500).json({ message: "Server Error" });
   }
 };
