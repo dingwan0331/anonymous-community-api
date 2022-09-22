@@ -79,9 +79,9 @@ describe("DELETE /posts/:postId", () => {
     );
   });
 
-  test("Not Found url", async () => {
+  test("Not Found url (Invalid postId)", async () => {
     const response = await supertest(app)
-      .delete(`/posts/632b20a0a3e6d877b4d0a885`)
+      .delete(`/posts/agdsf`)
       .send({ password: "agag" });
 
     expect(response.statusCode).toBe(404);
