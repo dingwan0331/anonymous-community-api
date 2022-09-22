@@ -43,7 +43,7 @@ const deletePost = async (req, res, next) => {
     const { password } = req.body;
 
     if (!postId) {
-      throw new NotFoundError("Invalid URL");
+      throw new NotFoundError();
     }
 
     if (!password) {
@@ -67,7 +67,7 @@ const updatePost = async (req, res, next) => {
     const { password, title, content } = req.body;
 
     if (!postId) {
-      throw new NotFoundError("Invalid URL");
+      throw new NotFoundError();
     }
 
     if (!password || !title || !content) {

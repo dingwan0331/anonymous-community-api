@@ -47,7 +47,7 @@ describe("DELETE /posts/:postId", () => {
 
   test("Success Many Case", async () => {
     for (let i = postRows.length; 0 < i; i--) {
-      const postId = String(postRows.pop()._id);
+      const postId = postRows.pop()._id;
       const response = await supertest(app)
         .delete(`/posts/${postId}`)
         .send({ password: password });
@@ -56,9 +56,7 @@ describe("DELETE /posts/:postId", () => {
       expect(response.body).toStrictEqual({});
       expect(response.headers["content-type"]).toBe(undefined);
 
-      const checkResponse = await supertest(app)
-        .delete(`/posts/${postId}`)
-        .send({ password: password });
+      const checkResponse = await supertest(app).get(`/posts/${postId}`);
 
       expect(checkResponse.statusCode).toBe(404);
       expect(checkResponse.body).toStrictEqual({ message: "Not Found url" });
