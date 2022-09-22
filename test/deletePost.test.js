@@ -56,9 +56,7 @@ describe("DELETE /posts/:postId", () => {
       expect(response.body).toStrictEqual({});
       expect(response.headers["content-type"]).toBe(undefined);
 
-      const checkResponse = await supertest(app)
-        .delete(`/posts/${postId}`)
-        .send({ password: password });
+      const checkResponse = await supertest(app).get(`/posts/${postId}`);
 
       expect(checkResponse.statusCode).toBe(404);
       expect(checkResponse.body).toStrictEqual({ message: "Not Found url" });
