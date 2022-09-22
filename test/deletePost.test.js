@@ -47,7 +47,7 @@ describe("DELETE /posts/:postId", () => {
 
   test("Success Many Case", async () => {
     for (let i = postRows.length; 0 < i; i--) {
-      const postId = String(postRows.pop()._id);
+      const postId = postRows.pop()._id;
       const response = await supertest(app)
         .delete(`/posts/${postId}`)
         .send({ password: password });
