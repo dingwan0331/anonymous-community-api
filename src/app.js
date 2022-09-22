@@ -6,6 +6,7 @@ const { errorResponder } = require("./middlewares/errorHandler");
 const ccqp = require("ccqp");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger/swagger-output.json");
+const { NotFoundError } = require("./utils/errors.js");
 
 const app = express();
 
@@ -27,6 +28,10 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(swaggerDocument, { explorer: true })
 );
+app.use((req, res, next) => {
+  const err = new NotFoundError();
+  next(err);
+});
 
 app.use(errorResponder);
 

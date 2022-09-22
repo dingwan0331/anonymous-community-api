@@ -14,8 +14,4 @@ router.use(
   postRouter
 );
 
-router.use((req, res, next) => {
-  const err = new NotFoundError();
-  next(err);
-});
 module.exports = router;
