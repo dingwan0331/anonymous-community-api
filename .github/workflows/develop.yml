@@ -49,4 +49,4 @@ jobs:
           push: true
           tags: dingwan0331/anonymous-community-api:latest
           secrets: |
-              "MONGO_URL=${{ secrets.MONGO_URL }}"
+              "MONGODB_URL=${{ secrets.MONGODB_URL }}"
