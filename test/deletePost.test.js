@@ -12,7 +12,7 @@ afterAll(async () => {
   await db.disconnect();
 });
 
-describe("DELETE /posts/postId", () => {
+describe("DELETE /posts/:postId", () => {
   let nowDate = new Date();
   const insertDatas = [];
   let postRows = [];
