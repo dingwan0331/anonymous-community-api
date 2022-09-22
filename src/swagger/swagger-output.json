@@ -17,31 +17,12 @@
         "description": "",
         "parameters": [],
         "responses": {
-          "200": { "description": "OK" },
+          "200": { "description": "Pong" },
           "500": { "description": "Server Error" }
         }
       }
     },
     "/posts": {
-      "post": {
-        "tags": ["Posts"],
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "201": { "description": "Created" },
-          "400": { "description": "Key error, Invalid (reqBodyKey)" },
-          "500": { "description": "Server Error" }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/Post:post-request-body"
-              }
-            }
-          }
-        }
-      },
       "get": {
         "tags": ["Posts"],
         "description": "",
@@ -73,11 +54,48 @@
               }
             }
           },
+          "404": { "description": "Not Found url" },
           "500": { "description": "Server Error" }
+        }
+      },
+      "post": {
+        "tags": ["Posts"],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "201": { "description": "Created" },
+          "400": {
+            "description": "Key error/ Invalid title/ Invalid content/ Invalid password"
+          },
+          "500": { "description": "Server Error" }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Post:post-request-body"
+              }
+            }
+          }
         }
       }
     },
     "/posts/{postId}": {
+      "get": {
+        "tags": ["Posts"],
+        "description": "",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/definitions/Post:get-response-body" }
+              }
+            }
+          },
+          "404": { "description": "Not Found url" },
+          "500": { "description": "Server Error" }
+        }
+      },
       "delete": {
         "tags": ["Posts"],
         "description": "",
@@ -93,8 +111,10 @@
         ],
         "responses": {
           "204": { "description": "No Content" },
-          "400": { "description": "Key error, Invalid (reqBodyKey)" },
-          "404": { "description": "Invalid URL" },
+          "400": {
+            "description": "Key error/ Invalid title/ Invalid content/ Invalid password"
+          },
+          "404": { "description": "Not Found url" },
           "500": { "description": "Server Error" }
         },
         "requestBody": {
@@ -125,9 +145,9 @@
             "description": "No Content"
           },
           "400": {
-            "description": "Key error, Invalid (reqBodyKey)"
+            "description": "Key error/ Invalid title/ Invalid content/ Invalid password"
           },
-          "404": { "description": "Invalid URL" },
+          "404": { "description": "Not Found url" },
           "500": {
             "description": "Server Error"
           }
@@ -202,6 +222,7 @@
     },
     "Post:get-response-body": {
       "properties": {
+        "_id": { "example": "632c23c08c9a643e34b691e9" },
         "title": { "example": "게시물 제목입니다." },
         "content": { "example": "게시물 본문입니다." },
         "userName": { "example": "게시물 작성자입니다." },
