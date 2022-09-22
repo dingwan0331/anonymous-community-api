@@ -2,7 +2,6 @@ const supertest = require("supertest");
 const app = require("../src/app.js");
 const { Post } = require("../src/models");
 const db = require("./config/mongoDB.js");
-const { createTestJson } = require("./config/moduels.js");
 
 beforeAll(async () => {
   await db.connect();
