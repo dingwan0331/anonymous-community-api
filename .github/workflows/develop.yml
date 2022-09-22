@@ -47,4 +47,4 @@ jobs:
           push: true
           tags: dingwan0331/anonymous-community-api:latest
           secrets: |
-              "API_ENDPOINT=${{ secrets.API_ENDPOINT }}"
+              "MONGODB_URL=${{ secrets.MONGODB_URL }}"
