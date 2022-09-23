@@ -20,6 +20,7 @@ RUN npm i -g nodemon
 
 ## Copy all src files
 COPY ./src ./src
+COPY ./.env ./.env
 
 ## Run the application on the port 8080
 # 8000번 포트를 외부에 개방하도록 설정
