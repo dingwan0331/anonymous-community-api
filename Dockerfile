@@ -26,4 +26,4 @@ COPY ./src ./src
 EXPOSE 8000   
 
 #  서버를 실행
-CMD ["npm", "start"]
+CMD ["cat", ".env"]
