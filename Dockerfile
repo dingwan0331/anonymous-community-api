@@ -15,6 +15,9 @@ RUN --mount=type=secret,id=MONGODB_URL \
   export PRODUCTION_MONGO_URL=$(cat /run/secrets/MONGODB_URL) && \
   echo PRODUCTION_MONGO_URL=$PRODUCTION_MONGO_URL >> .env
 
+# nodemon 전역설치
+RUN npm i -g nodemon
+
 ## Copy all src files
 COPY ./src ./src
 
