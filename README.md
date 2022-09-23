@@ -8,23 +8,16 @@
 
 # 사용기술 스택
 
-<img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white"> 
-<img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white">
-<img src="https://img.shields.io/badge/mongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white"> 
-<img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white">  
+<img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white"> <img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white"><img src="https://img.shields.io/badge/mongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white"> <img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white">  
 <br>
-<img src="https://img.shields.io/badge/amazon ec2-FF9900?style=for-the-badge&logo=amazon ec2&logoColor=white">  
-<img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"> 
+<img src="https://img.shields.io/badge/amazon ec2-FF9900?style=for-the-badge&logo=amazon ec2&logoColor=white">  <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"> 
 <br>
-<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">   
-<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> 
-<img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=github actions&logoColor=white">
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=github actions&logoColor=white">
 <br><br>
 
 # TEST 도구
 
- <img src="https://img.shields.io/badge/jest-C21325?style=for-the-badge&logo=jest&logoColor=white">
-  <img src="https://img.shields.io/badge/supertest-141526?style=for-the-badge&logo=supertest&logoColor=white">
+ <img src="https://img.shields.io/badge/jest-C21325?style=for-the-badge&logo=jest&logoColor=white"> <img src="https://img.shields.io/badge/supertest-141526?style=for-the-badge&logo=supertest&logoColor=white">
 
   <br>
 
@@ -161,13 +154,13 @@ npm test
 
 1. 프로젝트 최상위에 .env 파일을 생성해줍니다.
 
-- 배포 환경시
+  - 배포 환경시
 
   ```bash
   echo PRODUCTION_MONGODB_URL=<mognoDB_url> >> .env
   ```
 
-- 개발 환경시
+  - 개발 환경시
   ```bash
   echo DEV_MONGODB_URL=<mognoDB_url> >> .env
   ```
@@ -175,22 +168,22 @@ npm test
 
 2. 의존성 모듈을 설치해 줍니다.
 
-- 배포 환경시
+  - 배포 환경시
   ```bash
   npm ci --only=production
   ```
-- 개발 환경시
+  - 개발 환경시
   ```bash
   npm ci
   ```
 
 3. 프로젝트 실행 스크립트를 입력합니다
 
-- 배포 환경시
+  - 배포 환경시
   ```bash
   npm start
   ```
-- 개발 환경시
+  - 개발 환경시
   ```bash
   npm run dev
   ```
