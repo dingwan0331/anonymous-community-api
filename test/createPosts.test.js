@@ -24,9 +24,19 @@ describe("Post /posts", () => {
       password: "1231231a",
     };
     const response = await supertest(app).post("/posts").send(reqJson);
+    const post = await Post.find({
+      title: "제목입니다",
+      content: "내용입니다",
+      userName: "userName",
+    })
+      .sort({ $natural: -1 })
+      .limit(1);
+
+    const postId = post[0]._id;
 
     expect(response.statusCode).toBe(201);
     expect(response.body).toStrictEqual({ message: "Created" });
+    expect(response.headers.location).toStrictEqual(`/posts/${postId}`);
     expect(response.headers["content-type"]).toBe(
       "application/json; charset=utf-8"
     );

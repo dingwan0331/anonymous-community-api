@@ -9,10 +9,10 @@ const { Post } = require("../../models");
  * @param {string} inputValues.password 암호화된 게시물 비밀번호
  */
 const createPost = async (inputValues) => {
-  const postRow = new Post(inputValues);
-  await postRow.save();
+  const post = new Post(inputValues);
+  const postRow = await post.save();
 
-  return;
+  return postRow;
 };
 
 /**
