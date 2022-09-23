@@ -49,6 +49,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: dingwan0331/anonymous-community-api:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/anonymous-community-api:latest
           secrets: |
               "MONGODB_URL=${{ secrets.MONGODB_URL }}"
