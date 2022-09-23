@@ -2,21 +2,23 @@ const express = require("express");
 const cors = require("cors");
 const logger = require("morgan");
 const indexRouter = require("./routes");
-const { errorLogger, errorResponder } = require("./middlewares/errorHandler");
-const { sequelize } = require("./models");
+const { errorResponder } = require("./middlewares/errorHandler");
 const ccqp = require("ccqp");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger/swagger-output.json");
+const { NotFoundError } = require("./utils/errors.js");
 
 const app = express();
 
-sequelize
-  .sync({ force: false })
-  .then(() => console.log("connected database"))
-  .catch((err) => console.error("occurred error in database connecting", err));
+const loggerSet = {
+  production: "combined",
+  development: "dev",
+  test: "dev",
+};
+const loggerOption = loggerSet[process.env.NODE_ENV];
 
 app.use(cors());
-app.use(logger("combined"));
+app.use(logger(loggerOption));
 app.use(express.json());
 app.use(ccqp);
 
@@ -26,8 +28,11 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(swaggerDocument, { explorer: true })
 );
+app.use((req, res, next) => {
+  const err = new NotFoundError();
+  next(err);
+});
 
-app.use(errorLogger);
 app.use(errorResponder);
 
 module.exports = app;

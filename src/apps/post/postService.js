@@ -15,7 +15,6 @@ const { BadRequestError, NotFoundError } = require("../../utils/errors");
 const createPost = async (reqBody) => {
   const { title, content, userName, password } = reqBody;
 
-  // 데이터 유효성 검사
   new Validator(reqBody);
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -29,7 +28,10 @@ const createPost = async (reqBody) => {
 
   const postRow = await postDao.createPost(postData);
 
-  return postRow;
+  const postId = postRow._id;
+  const location = `/posts/${postId}`;
+
+  return location;
 };
 
 /**
@@ -48,6 +50,18 @@ const readPosts = async ({ offset = 0, limit = 20, orderKey = "latest" }) => {
 
   const order = orderSet[orderKey];
 
+  if (isNaN(+offset)) {
+    throw new BadRequestError("Invalid offset");
+  }
+
+  if (isNaN(+limit)) {
+    throw new BadRequestError("Invalid limit");
+  }
+
+  if (!order) {
+    throw new BadRequestError("Invalid order-key");
+  }
+
   const postRows = await postDao.readPosts(offset, limit, order);
 
   /**
@@ -62,6 +76,7 @@ const readPosts = async ({ offset = 0, limit = 20, orderKey = "latest" }) => {
    */
   const posts = postRows.map((row) => {
     const post = {
+      _id: row._id,
       title: row.title,
       content: row.content,
       userName: row.userName,
@@ -85,7 +100,7 @@ const deletePost = async (postId, password) => {
   const postRow = await postDao.readPost(postId);
 
   if (!postRow) {
-    throw new NotFoundError("Invalid URL");
+    throw new NotFoundError();
   }
 
   const postRowPassword = postRow.password;
@@ -96,9 +111,9 @@ const deletePost = async (postId, password) => {
     throw new BadRequestError("Invalid password");
   }
 
-  const deletePost = await postDao.deletePost(postId);
+  await postDao.deletePost(postId);
 
-  return deletePost;
+  return;
 };
 
 /**
@@ -113,24 +128,49 @@ const deletePost = async (postId, password) => {
 const updatePost = async (postId, reqBody) => {
   const { password, content, title } = reqBody;
 
-  // 데이터 유효성 검사
   new Validator(reqBody);
 
   const postRow = await postDao.readPost(postId);
 
   if (!postRow) {
-    throw new NotFoundError("Invalid URL");
+    throw new NotFoundError();
   }
   const postRowPassword = postRow.password;
 
   const isSamePassword = await bcrypt.compare(password, postRowPassword);
 
-  // update시 사용할 객체의 default값으로 기존 데이터값을 지정합니다.
-  const postRowConfig = { titile: postRow.title, content: postRow.content };
-  const upadateData = Object.assign(postRowConfig, reqBody);
+  if (!isSamePassword) {
+    throw new BadRequestError("Invalid password");
+  }
 
-  const result = await postDao.updatePost(postId, upadateData);
+  const upadateData = { content: content, title: title };
 
-  return result;
+  await postDao.updatePost(postId, upadateData);
+
+  return;
 };
-module.exports = { createPost, readPosts, deletePost, updatePost };
+
+/**
+ * @description 게시물단일 조회기능
+ * @param {string} postId 조회할 게시물의 _id 입니다.
+ * @returns {object} 게시물 정보
+ */
+const readPost = async (postId) => {
+  const postRow = await postDao.readPost(postId);
+
+  if (!postRow) {
+    throw new NotFoundError();
+  }
+
+  const post = {
+    _id: postRow._id,
+    title: postRow.title,
+    content: postRow.content,
+    userName: postRow.userName,
+    createdAt: postRow.createdAt,
+    updatedAt: postRow.updatedAt,
+  };
+
+  return post;
+};
+module.exports = { createPost, readPosts, deletePost, updatePost, readPost };

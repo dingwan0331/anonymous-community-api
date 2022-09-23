@@ -29,7 +29,7 @@ class ForbiddenError extends BasicError {
 
 // 서버가 요청받은 리소스를 찾을 수 없는 상태
 class NotFoundError extends BasicError {
-  constructor(message) {
+  constructor(message = "Not Found url") {
     super("NotFoundError", message, 404);
   }
 }
