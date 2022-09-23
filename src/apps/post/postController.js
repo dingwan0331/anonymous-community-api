@@ -13,9 +13,9 @@ const createPost = async (req, res, next) => {
       throw new BadRequestError("Key error");
     }
 
-    await postService.createPost(req.body);
+    const location = await postService.createPost(req.body);
 
-    res.status(201).json({ message: "Created" });
+    res.status(201).set("location", location).json({ message: "Created" });
   } catch (err) {
     next(err);
   }

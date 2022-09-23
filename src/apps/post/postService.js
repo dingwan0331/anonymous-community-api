@@ -26,9 +26,12 @@ const createPost = async (reqBody) => {
     password: hashedPassword,
   };
 
-  await postDao.createPost(postData);
+  const postRow = await postDao.createPost(postData);
 
-  return;
+  const postId = postRow._id;
+  const location = `/posts/${postId}`;
+
+  return location;
 };
 
 /**
