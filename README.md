@@ -10,14 +10,26 @@
 
 <img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white"> <img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white"><img src="https://img.shields.io/badge/mongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white"> <img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white">  
 <br>
-<img src="https://img.shields.io/badge/amazon ec2-FF9900?style=for-the-badge&logo=amazon ec2&logoColor=white">  <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"> 
+<<<<<<< HEAD
+<img src="https://img.shields.io/badge/amazon ec2-FF9900?style=for-the-badge&logo=amazon ec2&logoColor=white"> <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
 <br>
-<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=github actions&logoColor=white">
-<br><br>
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=github actions&logoColor=white">
+=======
+<img src="https://img.shields.io/badge/amazon ec2-FF9900?style=for-the-badge&logo=amazon ec2&logoColor=white"> <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
+<br>
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=github actions&logoColor=white">
+
+> > > > > > > b272f78b338e473dbe3a7d1d4cbd80ed4a8dd363
+> > > > > > > <br><br>
 
 # TEST 도구
 
- <img src="https://img.shields.io/badge/jest-C21325?style=for-the-badge&logo=jest&logoColor=white"> <img src="https://img.shields.io/badge/supertest-141526?style=for-the-badge&logo=supertest&logoColor=white">
+<<<<<<< HEAD
+<img src="https://img.shields.io/badge/jest-C21325?style=for-the-badge&logo=jest&logoColor=white"> <img src="https://img.shields.io/badge/supertest-141526?style=for-the-badge&logo=supertest&logoColor=white">
+=======
+<img src="https://img.shields.io/badge/jest-C21325?style=for-the-badge&logo=jest&logoColor=white"> <img src="https://img.shields.io/badge/supertest-141526?style=for-the-badge&logo=supertest&logoColor=white">
+
+> > > > > > > b272f78b338e473dbe3a7d1d4cbd80ed4a8dd363
 
   <br>
 
@@ -141,7 +153,7 @@ npm test
     도커허브에서 images를 pull 받아줍니다.
 
     ```
-    docker run -i -t <DOCKERHUB_USERNAME>/anonymous-community-api:latest
+    docker run -i -t -p 8000:8000 <DOCKERHUB_USERNAME>/anonymous-community-api:latest
     ```
 
     도커이미지를 실행합니다.(백그라운드 실행시 -d 옵션을 추가해줍니다)
@@ -154,39 +166,47 @@ npm test
 
 1. 프로젝트 최상위에 .env 파일을 생성해줍니다.
 
-  - 배포 환경시
+- 배포 환경시
 
-  ```bash
-  echo PRODUCTION_MONGODB_URL=<mognoDB_url> >> .env
-  ```
+```bash
+echo PRODUCTION_MONGODB_URL=<mognoDB_url> >> .env
+```
 
-  - 개발 환경시
-  ```bash
-  echo DEV_MONGODB_URL=<mognoDB_url> >> .env
-  ```
-  ### test DB는 별도로 필요하지 않습니다.
+- 개발 환경시
+
+```bash
+echo DEV_MONGODB_URL=<mognoDB_url> >> .env
+```
+
+### test DB는 별도로 필요하지 않습니다.
 
 2. 의존성 모듈을 설치해 줍니다.
 
-  - 배포 환경시
-  ```bash
-  npm ci --only=production
-  ```
-  - 개발 환경시
-  ```bash
-  npm ci
-  ```
+- 배포 환경시
+
+```bash
+npm ci --only=production
+```
+
+- 개발 환경시
+
+```bash
+npm ci
+```
 
 3. 프로젝트 실행 스크립트를 입력합니다
 
-  - 배포 환경시
-  ```bash
-  npm start
-  ```
-  - 개발 환경시
-  ```bash
-  npm run dev
-  ```
+- 배포 환경시
+
+```bash
+npm start
+```
+
+- 개발 환경시
+
+```bash
+npm run dev
+```
 
 # Trouble Shooting
 
