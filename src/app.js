@@ -9,38 +9,68 @@ import { join } from "path";
 import { readFileSync } from "fs";
 import { NotFoundError } from "./utils/errors.js";
 
-const app = express();
+const registeReqMiddlewares = (app) => {
+  const getLoggerOption = () => {
+    const loggerSet = {
+      production: "combined",
+      development: "dev",
+      test: "dev",
+    };
+    const loggerOption = loggerSet[process.env.NODE_ENV];
 
-const __dirname = process.env.PWD;
+    return loggerOption;
+  };
 
-const swaggerDocument = readFileSync(
-  join(__dirname, "./src/swagger/swagger-output.json"),
-  "utf-8"
-);
+  app.use(cors());
+  app.use(logger(getLoggerOption()));
+  app.use(express.json());
+  app.use(ccqp);
 
-const loggerSet = {
-  production: "combined",
-  development: "dev",
-  test: "dev",
+  return app;
 };
-const loggerOption = loggerSet[process.env.NODE_ENV];
 
-app.use(cors());
-app.use(logger(loggerOption));
-app.use(express.json());
-app.use(ccqp);
+const registeResMiddlewares = (app) => {
+  app.use((req, res, next) => {
+    const err = new NotFoundError();
+    next(err);
+  });
+  app.use(errorResponder);
 
-app.use(indexRouter);
-app.use(
-  "/docs",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, { explorer: true })
-);
-app.use((req, res, next) => {
-  const err = new NotFoundError();
-  next(err);
-});
+  return app;
+};
 
-app.use(errorResponder);
+const registeRouter = (app) => {
+  const getSwaggerOutput = () => {
+    const __dirname = process.env.PWD;
 
-export default app;
+    const swaggerOutput = readFileSync(
+      join(__dirname, "./src/swagger/swagger-output.json"),
+      "utf-8"
+    );
+
+    return swaggerOutput;
+  };
+
+  app.use(indexRouter);
+  app.use(
+    "/docs",
+    swaggerUi.serve,
+    swaggerUi.setup(getSwaggerOutput(), { explorer: true })
+  );
+
+  return app;
+};
+
+const createApp = () => {
+  const app = express();
+
+  registeReqMiddlewares(app);
+
+  registeRouter(app);
+
+  registeResMiddlewares(app);
+
+  return app;
+};
+
+export default createApp();
