@@ -1,5 +1,5 @@
-const { BadRequestError, NotFoundError } = require("../../utils/errors");
-const postService = require("./postService");
+import { BadRequestError, NotFoundError } from "../../utils/errors.js";
+import * as postService from "./postService.js";
 
 /**
  * @description 게시물 등록하기
@@ -95,4 +95,4 @@ const readPost = async (req, res, next) => {
     next(err);
   }
 };
-module.exports = { createPost, readPosts, deletePost, updatePost, readPost };
+export { createPost, readPosts, deletePost, updatePost, readPost };

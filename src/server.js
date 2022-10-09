@@ -1,10 +1,11 @@
-const http = require("http");
-const app = require("./app");
+import http from "http";
+import app from "./app.js";
 
-const { SERVER_PORT } = require("./config");
+import { SERVER_PORT } from "./config/index.js";
+import { mongoose } from "./models/index.js";
+import { MONGO_URL } from "./config/index.js";
+
 const server = http.createServer(app);
-const { mongoose } = require("./models");
-const { MONGO_URL } = require("./config");
 
 const serverStart = () => {
   try {
