@@ -1,5 +1,4 @@
 import app from "./app.js";
-
 import { SERVER_PORT } from "./config/index.js";
 import { mongoose } from "./models/index.js";
 import { MONGO_URL } from "./config/index.js";
