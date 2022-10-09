@@ -44,9 +44,8 @@ const registeRouter = (app) => {
   const getSwaggerOutput = () => {
     const __dirname = process.env.PWD;
 
-    const swaggerOutput = readFileSync(
-      join(__dirname, "./src/swagger/swagger-output.json"),
-      "utf-8"
+    const swaggerOutput = JSON.parse(
+      readFileSync(join(__dirname, "./src/swagger/swagger-output.json"))
     );
 
     return swaggerOutput;
