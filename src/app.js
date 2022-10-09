@@ -1,14 +1,22 @@
-const express = require("express");
-const cors = require("cors");
-const logger = require("morgan");
-const indexRouter = require("./routes");
-const { errorResponder } = require("./middlewares/errorHandler");
-const ccqp = require("ccqp");
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger/swagger-output.json");
-const { NotFoundError } = require("./utils/errors.js");
+import express from "express";
+import cors from "cors";
+import logger from "morgan";
+import indexRouter from "./routes/index.js";
+import { errorResponder } from "./middlewares/errorHandler.js";
+import ccqp from "ccqp";
+import swaggerUi from "swagger-ui-express";
+import { join } from "path";
+import { readFileSync } from "fs";
+import { NotFoundError } from "./utils/errors.js";
 
 const app = express();
+
+const __dirname = process.env.PWD;
+
+const swaggerDocument = readFileSync(
+  join(__dirname, "./src/swagger/swagger-output.json"),
+  "utf-8"
+);
 
 const loggerSet = {
   production: "combined",
@@ -35,4 +43,4 @@ app.use((req, res, next) => {
 
 app.use(errorResponder);
 
-module.exports = app;
+export default app;

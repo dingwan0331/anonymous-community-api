@@ -1,7 +1,7 @@
-const { Validator } = require("../../utils/validators");
-const postDao = require("./postDao");
-const bcrypt = require("bcrypt");
-const { BadRequestError, NotFoundError } = require("../../utils/errors");
+import { Validator } from "../../utils/validators.js";
+import * as postDao from "./postDao.js";
+import bcrypt from "bcrypt";
+import { BadRequestError, NotFoundError } from "../../utils/errors.js";
 
 /**
  * @description 게시판 데이터 생성에 대한 유효성검사와 비밀번호를 암호화합니다.
@@ -173,4 +173,4 @@ const readPost = async (postId) => {
 
   return post;
 };
-module.exports = { createPost, readPosts, deletePost, updatePost, readPost };
+export { createPost, readPosts, deletePost, updatePost, readPost };

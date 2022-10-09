@@ -1,7 +1,8 @@
-const express = require("express");
+import express from "express";
+import { default as postRouter } from "../apps/post/postRouter.js";
+import { NotFoundError } from "../utils/errors.js";
+
 const router = express.Router();
-const postRouter = require("../apps/post/postRouter");
-const { NotFoundError } = require("../utils/errors");
 
 router.get("/ping", (req, res) => {
   // #swagger.tags = ['Ping test']
@@ -14,4 +15,4 @@ router.use(
   postRouter
 );
 
-module.exports = router;
+export default router;

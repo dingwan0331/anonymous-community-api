@@ -31,4 +31,4 @@ const createTestJson = (
   return result;
 };
 
-module.exports = { createTestJson };
+export { createTestJson };

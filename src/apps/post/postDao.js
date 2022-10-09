@@ -1,4 +1,4 @@
-const { Post } = require("../../models");
+import { Post } from "../../models/index.js";
 
 /**
  * @description
@@ -56,4 +56,4 @@ const updatePost = async (postId, upadateData) => {
   return;
 };
 
-module.exports = { createPost, readPosts, readPost, deletePost, updatePost };
+export { createPost, readPosts, readPost, deletePost, updatePost };
