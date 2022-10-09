@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/dingwan0331/anonymous-community-api#readme",
   "dependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/node": "^7.19.1",
+    "@babel/preset-env": "^7.19.3",
     "bcrypt": "^5.0.1",
     "ccqp": "^1.0.0",
     "cors": "^2.8.5",
