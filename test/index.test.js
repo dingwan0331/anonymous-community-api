@@ -1,5 +1,5 @@
-import supertest from "supertest";
-import app from "../src/app.js";
+const supertest = require("supertest");
+const app = require("../src/app.js");
 
 describe("GET /ping", () => {
   test("Success", async () => {

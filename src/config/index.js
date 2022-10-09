@@ -1,8 +1,6 @@
-import dotenv from "dotenv";
+require("dotenv").config();
 
-dotenv.config();
-
-const { NODE_ENV, SERVER_PORT = 8000 } = process.env;
+const { NODE_ENV, SERVER_PORT = 8000, SECRET_KEY } = process.env;
 
 const mongoEnvSet = {
   development: "DEV",
@@ -14,4 +12,4 @@ const mongoEnv = mongoEnvSet[NODE_ENV];
 
 const MONGO_URL = process.env[`${mongoEnv}_MONGO_URL`];
 
-export { SERVER_PORT, MONGO_URL };
+module.exports = { SERVER_PORT, SECRET_KEY, MONGO_URL };

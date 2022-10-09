@@ -1,16 +1,19 @@
-import app from "./app.js";
-import { SERVER_PORT } from "./config/index.js";
-import { mongoose } from "./models/index.js";
-import { MONGO_URL } from "./config/index.js";
+const http = require("http");
+const app = require("./app");
 
-const serverStart = async (app) => {
+const { SERVER_PORT } = require("./config");
+const server = http.createServer(app);
+const { mongoose } = require("./models");
+const { MONGO_URL } = require("./config");
+
+const serverStart = () => {
   try {
-    await mongoose.connect(MONGO_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    mongoose
+      .connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+      .then(() => console.log("Successfully connected to mongodb"))
+      .catch((err) => console.error(err));
 
-    app.listen(SERVER_PORT, () => {
+    server.listen(SERVER_PORT, () => {
       console.log(`listening on ${SERVER_PORT}!`);
     });
   } catch (err) {
@@ -18,4 +21,4 @@ const serverStart = async (app) => {
   }
 };
 
-serverStart(app);
+serverStart();
