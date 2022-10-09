@@ -7,7 +7,7 @@ import { join } from "path";
 import { readFileSync } from "fs";
 
 import indexRouter from "./routes/index.js";
-import { errorResponder } from "./middlewares/errorHandler.js";
+import { responseError } from "./middlewares/errorHandler.js";
 import { NotFoundError } from "./utils/errors.js";
 
 const registeReqMiddlewares = (app) => {
@@ -35,7 +35,7 @@ const registeResMiddlewares = (app) => {
     const err = new NotFoundError();
     next(err);
   });
-  app.use(errorResponder);
+  app.use(responseError);
 
   return app;
 };
