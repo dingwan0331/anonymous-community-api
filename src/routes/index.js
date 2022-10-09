@@ -1,6 +1,5 @@
 import express from "express";
 import { default as postRouter } from "../apps/post/postRouter.js";
-import { NotFoundError } from "../utils/errors.js";
 
 const router = express.Router();
 
