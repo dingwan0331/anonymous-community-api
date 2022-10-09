@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { MongoMemoryServer } from "mongodb-memory-server";
+const mongoose = require("mongoose");
+const { MongoMemoryServer } = require("mongodb-memory-server");
 
 let mongoServer;
 
@@ -25,4 +25,4 @@ const drop = async () => {
   await mongoose.connection.dropDatabase();
 };
 
-export { connect, disconnect, drop };
+module.exports = { connect, disconnect, drop };

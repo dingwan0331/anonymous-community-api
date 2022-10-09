@@ -1,4 +1,4 @@
-import { BadRequestError } from "./errors.js";
+const { BadRequestError } = require("./errors");
 
 /**
  * @description Object형식으로 데이터를 받아 해당 데이터들의 유효성을 검증합니다.
@@ -62,4 +62,4 @@ class Validator {
   }
 }
 
-export { Validator };
+module.exports = { Validator };

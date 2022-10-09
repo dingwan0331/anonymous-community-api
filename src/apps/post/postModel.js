@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import mongooseDelete from "mongoose-delete";
+const mongoose = require("mongoose");
+const mongooseDelete = require("mongoose-delete");
 
 const postSchema = new mongoose.Schema(
   {
@@ -15,4 +15,4 @@ const postSchema = new mongoose.Schema(
 
 postSchema.plugin(mongooseDelete, { deletedAt: true, overrideMethods: true });
 
-export { postSchema };
+module.exports = { postSchema };
