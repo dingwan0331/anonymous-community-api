@@ -34,7 +34,7 @@ class NotFoundError extends BasicError {
   }
 }
 
-module.exports = {
+export {
   BasicError,
   BadRequestError,
   UnauthorizedError,

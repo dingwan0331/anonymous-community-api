@@ -1,7 +1,7 @@
-const supertest = require("supertest");
-const app = require("../src/app.js");
-const { Post } = require("../src/models");
-const db = require("./config/mongoDB.js");
+import supertest from "supertest";
+import app from "../src/app.js";
+import { Post } from "../src/models/index.js";
+import * as db from "./config/mongoDB.js";
 
 beforeAll(async () => {
   await db.connect();
