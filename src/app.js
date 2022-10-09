@@ -1,12 +1,13 @@
 import express from "express";
 import cors from "cors";
 import logger from "morgan";
-import indexRouter from "./routes/index.js";
-import { errorResponder } from "./middlewares/errorHandler.js";
 import ccqp from "ccqp";
 import swaggerUi from "swagger-ui-express";
 import { join } from "path";
 import { readFileSync } from "fs";
+
+import indexRouter from "./routes/index.js";
+import { errorResponder } from "./middlewares/errorHandler.js";
 import { NotFoundError } from "./utils/errors.js";
 
 const registeReqMiddlewares = (app) => {
