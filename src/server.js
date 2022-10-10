@@ -5,14 +5,16 @@ import { MONGO_URL } from "./config/index.js";
 
 const serverStart = async (app) => {
   try {
-    // await mongoose.connect(MONGO_URL, {
-    //   useNewUrlParser: true,
-    //   useUnifiedTopology: true,
-    // });
-
-    app.listen(SERVER_PORT, () => {
-      console.log(`listening on ${SERVER_PORT}!`);
+    await mongoose.connect(MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
+
+    console.log("MongoDB connect");
+
+    app.listen(SERVER_PORT);
+
+    console.log(`listening on ${SERVER_PORT}!`);
   } catch (err) {
     console.error(err);
   }
