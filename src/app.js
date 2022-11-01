@@ -48,6 +48,8 @@ const registeRouter = (app) => {
       readFileSync(join(__dirname, "./src/swagger/swagger-output.json"))
     );
 
+    console.log(swaggerOutput);
+
     return swaggerOutput;
   };
 
