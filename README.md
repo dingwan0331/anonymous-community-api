@@ -64,6 +64,10 @@ src
 - posts 단일 테이블이며 비밀번호는 암호화하여 저장합니다.
 - 논리삭제시 deleted가 true로 바뀌며 deletedAt이 추가됩니다.
   <br><br>
+  
+# End-Point
+<img width="263" alt="image" src="https://user-images.githubusercontent.com/100751719/200511187-b90b2dcb-07ee-4e15-9b99-9cbec50406df.png">
+
 
 # Project Test 방법
 
